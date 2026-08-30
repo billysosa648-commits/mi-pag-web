@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="js/scripts.js" defer></script>
   <link rel="stylesheet" href="./Styles/Sytyles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,45 +10,12 @@
 <body>
   <h1>Bienvenido a Dare-tech</h1>
   <h2>Empresa dedicada a la reparacion o restauracion de dispositivos electronicos como computadoras, celulares, tablets, etc.</h2>
-  <p>Porfavor describa la falla de su dispositivo en el siguiente campo</p>
+  <p>Porfavor describa la falla de su dispositivo en el siguiente campo <strong>Agregando su nombre y numero de telefono o correo electronico</strong></p>
   
-  <!-- Agregamos el id al form y al textarea para que el script los reconozca -->
-  <form id="fallaForm">
-    <textarea id="mensajeFalla" name="" cols="30" rows="10"></textarea>
+  <form id="fallaForm" method="post" data-netlify="true">
+    <textarea id="mensajeFalla" name="mensaje" cols="50" rows="10"></textarea>
     <button type="submit">Enviar</button>
   </form>
-
-  <!-- Pega el código de JavaScript aquí dentro -->
-  <script>
-    const form = document.getElementById('fallaForm');
-    const textarea = document.getElementById('mensajeFalla');
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const mensaje = textarea.value.trim();
-
-      if (mensaje === "") {
-        alert("Por favor escribe una descripción de la falla.");
-        return;
-      }
-
-      try {
-        const respuesta = await fetch('/.netlify/functions/enviar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mensaje })
-        });
-
-        if (respuesta.ok) {
-          alert("¡Mensaje enviado con éxito!");
-          textarea.value = "";
-        } else {
-          alert("Hubo un error al enviar el mensaje.");
-        }
-      } catch (error) {
-        alert("Error de conexión.");
-      }
-    });
-  </script>
 </body>
+
 </html>
